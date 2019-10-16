@@ -14,9 +14,14 @@ short** crea_life(unsigned n, unsigned m, unsigned h)
 	if (matData == NULL || mat == NULL)
 		return NULL;
 
+	for (int i = 0; i < n; i++)
+	{
+		mat[i] = &(matData[i * m]);// oppure  = matData + m * sizeof(short)
+	}
+
 	// numero di celle libere
 	int freeCells = N;
-	if (freeCells > h)
+	if (freeCells> h)
 	{
 		// metti tutto a 0;
 		for (int i = 0; i < N; i++)
@@ -35,9 +40,10 @@ short** crea_life(unsigned n, unsigned m, unsigned h)
 
 			// cammina fino a trovare quella psizione
 			int j = 0;
-			for (int i = 0; i < k; i++, j++)
+			for (int i = 0; i < k + 1; i++)
 			{
-				while (matData[j % N] != 0)
+				j++;
+				while (matData[j % N])
 					j++;
 			}
 			// riempi la cella selezionata
@@ -49,11 +55,6 @@ short** crea_life(unsigned n, unsigned m, unsigned h)
 		// metti tutto a 1;
 		for (int i = 0; i < N; i++)
 			matData[i] = 1;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		mat[i] = &(matData[i * m]);// oppure  = matData + m * sizeof(short)
 	}
 
 	return mat;

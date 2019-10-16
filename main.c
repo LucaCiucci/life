@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 
 
 	// solo per test, elimina
-	short** mat = crea_life(10, 10, 21);
+	short** mat = crea_life(10, 10, 100);
 	print_life(mat, 10, 10);
 
 	printf("numero di passi: %d", nStep);
