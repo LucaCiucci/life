@@ -9,6 +9,7 @@ int main(int argc, char** argv)
 	//srand(time(NULL));
 	int nStep = 1;
 	const char* fileName = NULL;
+	int n = 10, m = 10, h = 25;
 
 	if (argc <= 1)
 	{
@@ -61,8 +62,8 @@ int main(int argc, char** argv)
 
 
 	// solo per test, elimina
-	short** mat = crea_life(10, 10, 100);
-	print_life(mat, 10, 10);
+	short** mat = crea_life(n, m, h);
+	print_life(mat, n, n);
 
 	printf("numero di passi: %d", nStep);
 	printf("\n\n\n\n");
