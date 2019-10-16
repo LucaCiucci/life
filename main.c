@@ -1,24 +1,34 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
+#include "life.h"
 int main(int argc, char** argv)
 {
+	//srand(time(NULL));
 	int nStep = 1;
+	const char* fileName = NULL;
 
 	if (argc <= 1)
 	{
+		// non sono stati passati parametri
 		printf("niente mparametri\n");
 	}
 	else
 	{
+		// sono stati passati parametri
+
+		bool fileNameFound = false;
+		bool nStepFound = false;
+
 		printf("%d parametri\n", argc - 1);
 
 		// troviamo i parametri
 		for (int i = 1; i < argc; i++)
 		{
 			// cerca "-s"
-			if (strcmp(argv[i], "-s") == 0)
+			if (!nStepFound && strcmp(argv[i], "-s") == 0)
 			{
 				if (i >= argc - 1)// se -s è l'ultimo dei parametri
 				{
@@ -34,12 +44,25 @@ int main(int argc, char** argv)
 						return -1;
 					}
 					// altrimenti ho trovato il numero
-					break;
+					nStepFound = true;
+					i++;// dopo parto dal parametro dopo
+					continue;
 				}
+			}
+			if (!fileNameFound && argv[i][0] != '-')
+			{
+				fileNameFound = true;
+				fileName = argv[i];
+				printf("nome file = %s\n", fileName);
+				continue;
 			}
 		}
 	}
 
+
+	// solo per test, elimina
+	short** mat = crea_life(10, 10, 21);
+	print_life(mat, 10, 10);
 
 	printf("numero di passi: %d", nStep);
 	printf("\n\n\n\n");
